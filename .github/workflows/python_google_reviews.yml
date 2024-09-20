@@ -41,7 +41,7 @@ jobs:
           python google_reviews_web_scraping.py  # Run the Python script converted from the notebook
 
       - name: Archive Output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: reviews-output
           path: reviews_output.txt  # Upload the result file as an artifact
