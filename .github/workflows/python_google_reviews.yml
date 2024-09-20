@@ -1,0 +1,35 @@
+name: Run Google Reviews Scraper
+
+on:
+  push:
+    branches:
+      - main  # Triggers the action on push to the main branch
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  scrape-google-reviews:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Set your preferred Python version
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Ensure your dependencies are listed here (e.g., selenium, bs4)
+
+      - name: Run Google Reviews Scraper
+        run: |
+          python google_reviews_web_scraping.py  # Run the Python script that scrapes the reviews
+
+      - name: Archive Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: reviews-output
+          path: reviews_output.txt  # Upload the result file as an artifact
